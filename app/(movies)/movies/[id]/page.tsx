@@ -1,19 +1,25 @@
 import { Suspense } from 'react';
-import MovieInfo from '../../../../components/movie-info';
+import MovieInfo, { getMovie } from '../../../../components/movie-info';
 import MovieVideos from '../../../../components/movie-videos';
 
-export default async function MovieDetail({
-  params: { id },
-}: {
+interface IParams {
   params: { id: string };
-}) {
+}
+
+export async function generateMetadata({ params: { id } }: IParams) {
+  const movie = await getMovie(id); // 실제 통신
+
+  return {
+    title: movie.title,
+  };
+} // Dynamic metadata (동적인 제목을 갖고있는 페이지를 위해 존재하는 함수)
+
+export default async function MovieDetail({ params: { id } }: IParams) {
   return (
     <div>
-      <h3>Movie detail page</h3>
       <Suspense fallback={<h1>Loading movie info</h1>}>
         <MovieInfo id={id} />
       </Suspense>
-      <h3>Videos</h3>
       <Suspense fallback={<h1>Loading movie Videos</h1>}>
         <MovieVideos id={id} />
       </Suspense>
