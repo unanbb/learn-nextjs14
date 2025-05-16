@@ -12,7 +12,7 @@ export async function generateMetadata({ params: { id } }: IParams) {
   return {
     title: movie.title,
   };
-} // Dynamic metadata (동적인 제목을 갖고있는 페이지를 위해 존재하는 함수)
+} // Dynamic metadata(동적인 제목을 갖고있는 페이지를 위해 존재하는 함수)
 
 export default async function MovieDetail({ params: { id } }: IParams) {
   return (
